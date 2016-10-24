@@ -22,7 +22,7 @@ export const notesReducer = (state = [], action) => {
         let idx = state.indexOf(action.key);
         return [
           ...state.slice(0, idx),
-          ...state.slice(idx)
+          ...state.slice(idx + 1)
         ];
       }
       return state;
