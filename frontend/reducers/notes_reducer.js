@@ -8,7 +8,7 @@ const validKey = (key) => {
 };
 
 export const notesReducer = (state = [], action) => {
-  Object.freeze();
+  Object.freeze(state);
   switch(action.type) {
     case (KEY_PRESSED):
       if (validKey(action.key) && !state.includes(action.key)) {
