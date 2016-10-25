@@ -4,40 +4,56 @@ import merge from 'lodash/merge';
 
 let currTrackId = 0;
 
-export const tracksReducer = (state = {}, action) => {
+const trackReducer = (state, action) => {
   Object.freeze(state);
-  switch (action.type) {
+  switch(action.type) {
     case START_RECORDING:
-      currTrackId++;
-      let newTrack = {
+      return {
         id: currTrackId,
         name: `Track_${currTrackId}`,
         roll: [],
         timeStart: Date.now()
       };
-      // return merge(state, {currentTrackId: newTrack});
-      return newTrack;
     case STOP_RECORDING:
-      const emptyNotes = {
-        notes: [],
-        timeSlice: action.timeNow - state.timeStart
-      };
       return merge({}, state, {
         roll: [
           ...state.roll,
-          emptyNotes
+          {
+            notes: [],
+            timeSlice: action.timeNow - state.timeStart
+          }
         ]
       });
     case ADD_NOTES:
-      const row = {
-        notes: action.notes,
-        timeSlice: action.timeNow - state.timeStart
-      };
       return merge({}, state, {
         roll: [
           ...state.roll,
-          row
+          {
+            notes: action.notes,
+            timeSlice: action.timeNow - state.timeStart
+          }
         ]
+      });
+    default:
+      return state;
+  }
+};
+
+export const tracksReducer = (state = {}, action) => {
+  Object.freeze(state);
+  switch (action.type) {
+    case START_RECORDING:
+      currTrackId++;
+      return merge({}, state, {
+        [currTrackId]: trackReducer(undefined, action)
+      });
+    case STOP_RECORDING:
+      return merge({}, state, {
+        [currTrackId]: trackReducer(state[currTrackId], action)
+      });
+    case ADD_NOTES:
+      return merge({}, state, {
+        [currTrackId]: trackReducer(state[currTrackId], action)
       });
     default:
       return state;
