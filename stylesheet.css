@@ -1,3 +1,29 @@
+html, body, div, ul, li {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+main{
+  display: flex;
+  flex-direction: column;
+}
+
+main > div {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+
+body {
+  font-family: 'Share Tech Mono', monospace;
+}
+
+h1 {
+  font-size: 10vmin;
+  text-align: center;
+}
+
 .pressed {
   background-color: red;
 }

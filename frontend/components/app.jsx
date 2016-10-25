@@ -6,11 +6,12 @@ import JukeboxContainer from './jukebox/jukebox_container';
 class App extends React.Component {
   render () {
     return (
-      <div>
+      <main>
+        <h1>synth</h1>
         <SynthContainer />
         <RecorderContainer />
         <JukeboxContainer />
-      </div>
+      </main>
     );
   }
 }

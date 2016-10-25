@@ -28,11 +28,6 @@ const mapDispatchToProps = dispatch => ({
       }
     }, 1);
   }
-
-  // return {
-  //   startPlaying: (track) => (e) => onPlay(track, e),
-  //   stopPlaying: (track) => (e) => onPlay(track, e)
-  // };
 });
 
 export default connect(

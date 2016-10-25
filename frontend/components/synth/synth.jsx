@@ -33,6 +33,15 @@ class Synth extends React.Component {
     }
   }
 
+  randomBackground() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++ ) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    $('body').css('background-color', color);
+  }
+
   playNotes() {
     NOTE_NAMES.forEach((note, idx) => {
       if (this.props.notes.includes(note)) {
@@ -45,9 +54,9 @@ class Synth extends React.Component {
 
   render () {
     this.playNotes();
+    this.randomBackground();
     return (
       <div>
-        <div>synth</div>
         {
           this.notes.map((note, idx) => <NoteKey key={idx} note={NOTE_NAMES[idx]} pressed={this.props.notes.includes(NOTE_NAMES[idx])} />)
         }
